@@ -65,10 +65,11 @@ namespace DOOR.Server.Controllers.UD
         }
 
         [HttpGet]
-        [Route("GetInstructor/{_InstructorID}")]
-        public async Task<IActionResult> GetInstructor(int _InstructorID)
+        [Route("GetInstructor/{_SchoolID}/{_InstructorID}")]
+        public async Task<IActionResult> GetInstructor(int _SchoolID, int _InstructorID)
         {
             var lst = await _context.Instructors
+                .Where(x=>x.SchoolId == _SchoolID)
                 .Where(x=>x.InstructorId == _InstructorID)
                 .Select(sp => new InstructorDTO
                 {
@@ -95,7 +96,7 @@ namespace DOOR.Server.Controllers.UD
         {
             try
             {
-                Instructor instructor = await _context.Instructors.Where(x => x.InstructorId == _InstructorDTO.InstructorId).FirstOrDefaultAsync();
+                Instructor? instructor = await _context.Instructors.Where(x => x.InstructorId == _InstructorDTO.InstructorId).FirstOrDefaultAsync();
 
                 if (instructor == null)
                 {

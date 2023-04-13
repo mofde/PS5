@@ -89,7 +89,9 @@ namespace DOOR.Server.Controllers.UD
         {
             try
             {
-                Enrollment? enrollment = await _context.Enrollments.Where(x => x.StudentId == _EnrollmentDTO.StudentId).FirstOrDefaultAsync();
+                Enrollment? enrollment = await _context.Enrollments.Where(x => x.SchoolId == _EnrollmentDTO.SchoolId)
+                                                                   .Where(x => x.SectionId == _EnrollmentDTO.SectionId)
+                                                                   .Where(x => x.StudentId == _EnrollmentDTO.StudentId).FirstOrDefaultAsync();
 
                 if (enrollment == null)
                 {
@@ -98,7 +100,11 @@ namespace DOOR.Server.Controllers.UD
                         StudentId = _EnrollmentDTO.StudentId,
                         SectionId = _EnrollmentDTO.SectionId,
                         EnrollDate = _EnrollmentDTO.EnrollDate,
-                        FinalGrade = _EnrollmentDTO.FinalGrade
+                        FinalGrade = _EnrollmentDTO.FinalGrade,
+                        CreatedBy = _EnrollmentDTO.CreatedBy,
+                        CreatedDate = _EnrollmentDTO.CreatedDate,
+                        ModifiedBy = _EnrollmentDTO.ModifiedBy,
+                        ModifiedDate = _EnrollmentDTO.ModifiedDate
                     };
                     _context.Enrollments.Add(enrollment);
                     await _context.SaveChangesAsync();
@@ -135,15 +141,17 @@ namespace DOOR.Server.Controllers.UD
         {
             try
             {
-                Enrollment enrollment = await _context.Enrollments.Where(x => x.StudentId == _EnrollmentDTO.StudentId).FirstOrDefaultAsync();
-
+                Enrollment? enrollment = await _context.Enrollments.Where(x => x.SchoolId == _EnrollmentDTO.SchoolId)
+                                                                   .Where(x => x.SectionId == _EnrollmentDTO.SectionId)
+                                                                   .Where(x => x.StudentId == _EnrollmentDTO.StudentId).FirstOrDefaultAsync();
                 if (enrollment != null)
                 {
-                    enrollment.StudentId = _EnrollmentDTO.StudentId;
-                    enrollment.SectionId = _EnrollmentDTO.SectionId;
                     enrollment.EnrollDate = _EnrollmentDTO.EnrollDate;
                     enrollment.FinalGrade = _EnrollmentDTO.FinalGrade;
-
+                    enrollment.SchoolId = _EnrollmentDTO.SchoolId;
+                    enrollment.StudentId = _EnrollmentDTO.StudentId;
+                    enrollment.SectionId = _EnrollmentDTO.SectionId;
+                    
                     _context.Enrollments.Update(enrollment);
                     await _context.SaveChangesAsync();
                 }
@@ -168,12 +176,15 @@ namespace DOOR.Server.Controllers.UD
 
 
         [HttpDelete]
-        [Route("DeleteEnrollment/{_StudentId}")]
-        public async Task<IActionResult> DeleteEnrollment(int _StudentId)
+        [Route("DeleteEnrollment//{_SchoolId}/{_SectionId}/{_StudentId")]
+        public async Task<IActionResult> DeleteEnrollment(int _SchoolId, int _SectionId, int _StudentId)
         {
             try
             {
-                Enrollment enrollment = await _context.Enrollments.Where(x => x.StudentId == _StudentId).FirstOrDefaultAsync();
+                Enrollment? enrollment = await _context.Enrollments
+                    .Where(x => x.SchoolId == _SchoolId)
+                    .Where(x => x.SectionId == _SectionId)
+                    .Where(x => x.StudentId == _StudentId).FirstOrDefaultAsync();
 
                 if (enrollment != null)
                 {

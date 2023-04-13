@@ -64,11 +64,12 @@ namespace CSBA6.Server.Controllers.app
 
 
         [HttpGet]
-        [Route("GetGradeConversion/{_SchoolId}")]
-        public async Task<IActionResult> GetGradeConversion(int _SchoolId)
+        [Route("GetGradeConversion/{_SchoolId}/{_LetterGrade}")]
+        public async Task<IActionResult> GetGradeConversion(int _SchoolId, string _LetterGrade)
         {
             var lst = await _context.GradeConversions
                 .Where(x => x.SchoolId == _SchoolId)
+                .Where(x => x.LetterGrade == _LetterGrade)
                 .Select(sp => new GradeConversionDTO
                 {
                     SchoolId = sp.SchoolId,
@@ -91,7 +92,8 @@ namespace CSBA6.Server.Controllers.app
         {
             try
             {
-                GradeConversion gradeConversion = await _context.GradeConversions.Where(x => x.SchoolId == _GradeConversionDTO.SchoolId).FirstOrDefaultAsync();
+                GradeConversion? gradeConversion = await _context.GradeConversions.Where(x => x.SchoolId == _GradeConversionDTO.SchoolId)
+                                                                                  .Where(x => x.LetterGrade == _GradeConversionDTO.LetterGrade).FirstOrDefaultAsync();
 
                 if (gradeConversion == null)
                 {
@@ -138,7 +140,8 @@ namespace CSBA6.Server.Controllers.app
         {
             try
             {
-                GradeConversion gradeConversion = await _context.GradeConversions.Where(x => x.SchoolId == _GradeConversionDTO.SchoolId).FirstOrDefaultAsync();
+                GradeConversion? gradeConversion = await _context.GradeConversions.Where(x => x.SchoolId == _GradeConversionDTO.SchoolId)
+                                                                                  .Where(x => x.LetterGrade == _GradeConversionDTO.LetterGrade).FirstOrDefaultAsync();
 
                 if (gradeConversion != null)
                 {
@@ -172,12 +175,13 @@ namespace CSBA6.Server.Controllers.app
 
 
         [HttpDelete]
-        [Route("DeleteGradeConversion/{_SchoolId}")]
-        public async Task<IActionResult> DeleteGradeConversion(int _SchoolId)
+        [Route("DeleteGradeConversion/{_SchoolId}/{_LetterGrade}")]
+        public async Task<IActionResult> DeleteGradeConversion(int _SchoolId, string _LetterGrade)
         {
             try
             {
-                GradeConversion gradeConversion = await _context.GradeConversions.Where(x => x.SchoolId == _SchoolId).FirstOrDefaultAsync();
+                GradeConversion? gradeConversion = await _context.GradeConversions.Where(x => x.SchoolId == _SchoolId)
+                                                                                  .Where(x => x.LetterGrade == _LetterGrade).FirstOrDefaultAsync();
 
                 if (gradeConversion != null)
                 {

@@ -65,11 +65,12 @@ namespace CSBA6.Server.Controllers.app
 
 
         [HttpGet]
-        [Route("GetCourse/{_CourseNo}")]
-        public async Task<IActionResult> GetSection(int _SectionId)
+        [Route("GetSection/{_SectionId}/{_SchoolId")]
+        public async Task<IActionResult> GetSection(int _SectionId, int _SchoolId)
         {
             var lst = await _context.Sections
                 .Where(x => x.SectionId == _SectionId)
+                .Where(x => x.SchoolId == _SchoolId)
                 .Select(sp => new SectionDTO
                 {
                     SectionId = sp.SectionId,
@@ -93,7 +94,8 @@ namespace CSBA6.Server.Controllers.app
         {
             try
             {
-                Section section = await _context.Sections.Where(x => x.SectionId == _SectionDTO.CourseNo).FirstOrDefaultAsync();
+                Section? section = await _context.Sections.Where(x => x.SectionId == _SectionDTO.SectionId)
+                                                          .Where(x => x.SchoolId == _SectionDTO.SchoolId).FirstOrDefaultAsync();
 
                 if (section == null)
                 {
@@ -141,7 +143,8 @@ namespace CSBA6.Server.Controllers.app
         {
             try
             {
-                Section section = await _context.Sections.Where(x => x.SectionId == _SectionDTO.SectionId).FirstOrDefaultAsync();
+                Section? section = await _context.Sections.Where(x => x.SectionId == _SectionDTO.SectionId)
+                                                          .Where(x => x.SchoolId == _SectionDTO.SchoolId).FirstOrDefaultAsync();
 
                 if (section != null)
                 {
@@ -176,12 +179,13 @@ namespace CSBA6.Server.Controllers.app
 
 
         [HttpDelete]
-        [Route("DeleteCourse/{_SectionId}")]
-        public async Task<IActionResult> DeleteSection(int _SectionId)
+        [Route("DeleteSection/{_SectionId}/{SchoolId}")]
+        public async Task<IActionResult> DeleteSection(int _SectionId, int _SchoolId)
         {
             try
             {
-                Section section = await _context.Sections.Where(x => x.SectionId == _SectionId).FirstOrDefaultAsync();
+                Section? section = await _context.Sections.Where(x => x.SectionId == _SectionId)
+                                                          .Where(x => x.SchoolId == _SchoolId).FirstOrDefaultAsync();
 
                 if (section != null)
                 {
