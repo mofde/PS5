@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DOOR.Shared.DTO
 {
-    internal class ZipcodeDTO
+    public class ZipcodeDTO
     {
         [StringLength(5)]
         [Unicode(false)]

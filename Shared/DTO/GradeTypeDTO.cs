@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DOOR.Shared.DTO
 {
-    internal class GradeTypeDTO
+    public class GradeTypeDTO
     {
         [Precision(8)]
         public int SchoolId { get; set; }
