@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DOOR.Shared.DTO
 {
-    internal class StudentDTO
+    public class StudentDTO
     {
         [Precision(8)]
         public int StudentId { get; set; }
