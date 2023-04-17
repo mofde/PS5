@@ -85,7 +85,7 @@ namespace CSBA6.Server.Controllers.app
         {
             try
             {
-                School school = await _context.Schools.Where(x => x.SchoolId == _SchoolDTO.SchoolId).FirstOrDefaultAsync();
+                School? school = await _context.Schools.Where(x => x.SchoolId == _SchoolDTO.SchoolId).FirstOrDefaultAsync();
 
                 if (school == null)
                 {
@@ -129,7 +129,7 @@ namespace CSBA6.Server.Controllers.app
         {
             try
             {
-                School school = await _context.Schools.Where(x => x.SchoolId == _SchoolDTO.SchoolId).FirstOrDefaultAsync();
+                School? school = await _context.Schools.Where(x => x.SchoolId == _SchoolDTO.SchoolId).FirstOrDefaultAsync();
 
                 if (school != null)
                 {
@@ -165,7 +165,7 @@ namespace CSBA6.Server.Controllers.app
         {
             try
             {
-                School school = await _context.Schools.Where(x => x.SchoolId == _SchoolId).FirstOrDefaultAsync();
+                School? school = await _context.Schools.Where(x => x.SchoolId == _SchoolId).FirstOrDefaultAsync();
 
                 if (school != null)
                 {
