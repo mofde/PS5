@@ -146,7 +146,7 @@ namespace DOOR.Server.Controllers.UD
         {
             try
             {
-                Instructor instructor = await _context.Instructors.Where(x => x.InstructorId == _InstructorDTO.InstructorId).FirstOrDefaultAsync();
+                Instructor? instructor = await _context.Instructors.Where(x => x.InstructorId == _InstructorDTO.InstructorId).FirstOrDefaultAsync();
 
                 if (instructor != null)
                 {
@@ -188,7 +188,7 @@ namespace DOOR.Server.Controllers.UD
         {
             try
             {
-                Instructor instructor = await _context.Instructors.Where(x => x.InstructorId == _InstructorId).FirstOrDefaultAsync();
+                Instructor? instructor = await _context.Instructors.Where(x => x.InstructorId == _InstructorId).FirstOrDefaultAsync();
 
                 if (instructor != null)
                 {
