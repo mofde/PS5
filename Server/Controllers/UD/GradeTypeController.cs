@@ -168,7 +168,7 @@ namespace CSBA6.Server.Controllers.app
 
         [HttpDelete]
         [Route("DeleteGradeType/{_SchoolId}/{_GradeTypeCode}")]
-        public async Task<IActionResult> DeleteCourse(int _SchoolId, string _GradeTypeCode)
+        public async Task<IActionResult> DeleteGradeType(int _SchoolId, string _GradeTypeCode)
         {
             try
             {
