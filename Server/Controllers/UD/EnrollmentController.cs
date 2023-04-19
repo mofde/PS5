@@ -30,6 +30,8 @@ using DOOR.Server.Controllers.Common;
 
 namespace DOOR.Server.Controllers.UD
 {
+    [ApiController]
+    [Route("api/[controller]")]
     public class EnrollmentController : BaseController
     {
         public EnrollmentController(DOOROracleContext _DBcontext,

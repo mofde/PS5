@@ -94,7 +94,7 @@ namespace CSBA6.Server.Controllers.app
                     zipcode = new Zipcode
                     {
                         Zip = _ZipcodeDTO.Zip,
-                        City = _ZipcodeDTO.Zip,
+                        City = _ZipcodeDTO.City,
                         State = _ZipcodeDTO.State
                     };
                     _context.Zipcodes.Add(zipcode);
