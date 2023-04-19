@@ -176,7 +176,7 @@ namespace DOOR.Server.Controllers.UD
 
 
         [HttpDelete]
-        [Route("DeleteEnrollment//{_SchoolId}/{_SectionId}/{_StudentId")]
+        [Route("DeleteEnrollment/{_SchoolId}/{_SectionId}/{_StudentId}")]
         public async Task<IActionResult> DeleteEnrollment(int _SchoolId, int _SectionId, int _StudentId)
         {
             try

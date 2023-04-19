@@ -69,8 +69,7 @@ namespace CSBA6.Server.Controllers.app
 
 
         [HttpGet]
-        [Route("GetStudent/{_StudentId}")]
-        [Route("GetStudent/{_SchoolId")]
+        [Route("GetStudent/{_StudentId}/{_SchoolId}")]
         public async Task<IActionResult> GetStudent(int _StudentId, int _SchoolId)
         {
             var lst = await _context.Students
@@ -196,8 +195,7 @@ namespace CSBA6.Server.Controllers.app
 
 
         [HttpDelete]
-        [Route("DeleteStudent/{_StudentId}")]
-        [Route("DeleteStudent/{_SchoolId}")]
+        [Route("DeleteStudent/{_StudentId}/{_SchoolId}")]
         public async Task<IActionResult> DeleteStudent(int _StudentId, int _SchoolId)
         {
             try

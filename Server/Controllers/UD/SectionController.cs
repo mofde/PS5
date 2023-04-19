@@ -65,7 +65,7 @@ namespace CSBA6.Server.Controllers.app
 
 
         [HttpGet]
-        [Route("GetSection/{_SectionId}/{_SchoolId")]
+        [Route("GetSection/{_SectionId}/{_SchoolId}")]
         public async Task<IActionResult> GetSection(int _SectionId, int _SchoolId)
         {
             var lst = await _context.Sections
